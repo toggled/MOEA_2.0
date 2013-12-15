@@ -5,6 +5,8 @@
 
 import java.io.*;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import org.moeaframework.core.Solution;
 import org.moeaframework.problem.DTLZ.*;
 
@@ -22,7 +24,7 @@ class generate_random_sol_DTLZ {
      * @param args the command line arguments
      */
     
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, ClassNotFoundException, InstantiationException, IllegalAccessException, NoSuchMethodException, IllegalArgumentException, InvocationTargetException {
         // TODO code application logic here
         int number_of_objective=2;
         int number_of_decvars=number_of_objective+9;
@@ -31,7 +33,18 @@ class generate_random_sol_DTLZ {
     
         String filename=System.getProperty("user.dir")+"/src/pf/DTLZ"+Integer.toString(dtlzwhat) +"_"+Integer.toString(number_of_objective)+"D"+".pf";
         double [] objective_value;
-        DTLZ dt=new DTLZ2(number_of_decvars,number_of_objective);
+        Class [] paramTypes = { int.class, int.class }; // DTLZ(int,int) 
+        Object []paramValues=new Object[]{number_of_decvars,number_of_objective};
+        
+        Class <?> clazz=Class.forName("org.moeaframework.problem.DTLZ.DTLZ"+dtlzwhat); //invoke class
+        System.out.println("invoking class: "+clazz.getName());
+        
+        Constructor<?> ctor=clazz.getConstructor(paramTypes); // create constructor 
+        
+        //System.out.println(ctor.getName());
+        Object o=ctor.newInstance(paramValues); //create new instance calling the constructor with arguments.
+        DTLZ dt=(DTLZ)o;
+       
         Solution sol=null;
         File file = new File(filename);
 	Writer output = null;
