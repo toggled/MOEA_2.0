@@ -28,8 +28,8 @@ class generate_random_sol_DTLZ {
         int number_of_decvars=number_of_objective+9;
         int numberofpoints = 1000;
         int dtlzwhat=3;
-        
-        String filename="/home/andy/Desktop/MOEAFramework-2.0/pf/DTLZ"+Integer.toString(dtlzwhat) +"_"+Integer.toString(number_of_objective)+"D"+".pf";
+    
+        String filename=System.getProperty("user.dir")+"/src/pf/DTLZ"+Integer.toString(dtlzwhat) +"_"+Integer.toString(number_of_objective)+"D"+".pf";
         double [] objective_value;
         DTLZ dt=new DTLZ2(number_of_decvars,number_of_objective);
         Solution sol=null;
