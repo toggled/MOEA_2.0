@@ -26,14 +26,14 @@ class generate_random_sol_DTLZ {
     
     public static void main(String[] args) throws IOException, ClassNotFoundException, InstantiationException, IllegalAccessException, NoSuchMethodException, IllegalArgumentException, InvocationTargetException {
         // TODO code application logic here
-        int number_of_objective=2;
+        int number_of_objective=3;
         int numberofpoints = 1000;
         int dtlzwhat=7;
     
         String filename=System.getProperty("user.dir")+"/src/pf/DTLZ"+Integer.toString(dtlzwhat) +"_"+Integer.toString(number_of_objective)+"D"+".pf";
         //System.out.println("filename: "+filename);
         double [] objective_value;
-        Class [] paramTypes = { int.class, int.class }; // DTLZ(int,int) 
+        Class [] paramTypes = { int.class}; // DTLZ(int,int) 
         Object []paramValues=new Object[]{number_of_objective};
         
         Class <?> clazz=Class.forName("org.moeaframework.problem.DTLZ.DTLZ"+dtlzwhat); //invoke class
